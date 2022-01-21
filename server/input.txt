@@ -1,0 +1,1 @@
+{"regiusername":"akshit","regipassword":"sweta","regiemail":"aswe","regiaddress":"harol","regimobile":"132537"}
