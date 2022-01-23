@@ -5,6 +5,7 @@ const fs=require('fs');
 const { json } = require('body-parser');
 const app = express()
 const port = 8080
+const jwt = require('jsonwebtoken');
 
 
 app.use(cors());
@@ -29,14 +30,23 @@ app.post("/login", (req,res) => {
       const regiinput = JSON.parse(regiuser);
       const logininput = JSON.parse(loginuser);
 
+
+      const token = jwt.sign({username: loginuser.username}, "khtieownfvhrt")
+
       if (logininput.username === regiinput.regiusername
          &&  logininput.password === regiinput.regipassword){
-            res.send(JSON.stringify({ message: "Login successfully" })); 
+            res.send(JSON.stringify({ message: "Login successfully" , token: token})); 
          }
       else{
          res.send(JSON.stringify({ message: "Login failed" }));
-      }
+      }  
 });
+
+
+app.post('/verifytoken', (req,res) =>{
+   console.log("token:", req.body.token);
+   res.send("verify success");
+})
 
 
 
